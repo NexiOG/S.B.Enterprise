@@ -1,28 +1,41 @@
 export interface CompanyInfo {
   name: string;
+  legalName?: string;
   tagline: string;
-  partnerStatus: string;
+  partnerStatus?: string;
+  description?: string;
   location: {
-    address: string;
+    addressLine1?: string;
+    address?: string;
     area: string;
     city: string;
     state: string;
     pincode: string;
-    landmark: string;
+    landmark?: string;
+    country?: string;
     fullAddress: string;
     googleMapsEmbedUrl: string;
+    googleMapsShareUrl?: string;
   };
   contact: {
     phones: string[];
+    whatsapp?: string;
+    whatsappDisplay?: string;
     email: string;
     displayHours: string;
     hoursDetail: {
       days: string;
       time: string;
-      sunday: string;
+      sunday?: string;
     };
   };
-  features: string[];
+  badges?: string[];
+  social?: {
+    facebook?: string;
+    linkedin?: string;
+    youtube?: string;
+  };
+  features?: string[];
 }
 
 export interface NavItem {

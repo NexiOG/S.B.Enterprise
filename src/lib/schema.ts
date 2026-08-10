@@ -83,3 +83,22 @@ export function getBlogPostingSchema(title: string, excerpt: string, date: strin
     },
   };
 }
+
+export function getProductSchema(name: string, description: string, categorySlug: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: name,
+    description: description,
+    category: categorySlug,
+    brand: {
+      '@type': 'Brand',
+      name: companyInfo.name,
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'INR',
+      availability: 'https://schema.org/InStock',
+    },
+  };
+}
