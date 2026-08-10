@@ -10,7 +10,7 @@ const studioOfferings = [
     title: 'Custom Next.js 15 Web Applications',
     subtitle: 'Modern B2B Portals & Customer Dashboards',
     description: 'Built with Next.js 15 and React — delivering ultra-fast responsive corporate websites, B2B customer ordering portals, and secure administrative inventory dashboards.',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/slide4.jpg',
     deliverables: [
       'Next.js 15 SSR architecture & lightning speed',
       'B2B customer ordering & invoice download portals',
@@ -22,7 +22,7 @@ const studioOfferings = [
     title: 'Cross-Platform iOS & Android Mobile Apps',
     subtitle: 'Native Mobile Applications for Sales & Field Teams',
     description: 'Custom mobile applications designed for field sales executives, warehouse staff, and business managers, featuring secure cloud database authentication and offline sync.',
-    image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_retail.jpg',
     deliverables: [
       'Cross-platform iOS and Android mobile apps',
       'Field sales order booking & collection tracking',
@@ -34,7 +34,7 @@ const studioOfferings = [
     title: 'Custom Enterprise Software Builds (CRM, CMS & ERP)',
     subtitle: 'Bespoke Business Management & Workflow Automation',
     description: 'We design and engineer tailored enterprise software systems built around your exact operational workflow — empowering teams with custom CRM platforms, content CMS tools, warehouse systems, and automated dashboards.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_corporate.jpg',
     deliverables: [
       'Custom Customer Relationship Management (CRM) Systems',
       'Content Management Systems (CMS) & Web Admin Portals',
@@ -48,7 +48,7 @@ const studioOfferings = [
     title: 'B2B Technical SEO & Growth Engineering',
     subtitle: 'Local Business Visibility & Organic Search Reach',
     description: 'Technical search engine optimization, local business visibility across West Bengal, structured schema markup, and Google Business Profile management.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/sbe_tally_partner.jpg',
     deliverables: [
       'Technical SEO audit & page speed optimization',
       'Local Kolkata business search ranking strategy',

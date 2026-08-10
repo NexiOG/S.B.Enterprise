@@ -9,7 +9,7 @@ const industries = [
     id: 'manufacturing',
     title: 'Manufacturing & Processing Plants',
     description: 'Multi-level Bill of Materials (BOM), godown raw material stock transfers, batch/expiry tracking, scrap recording, and manufacturing journal vouchers in TallyPrime.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_manufacturing.jpg',
     deliverables: [
       'Multi-level Bill of Materials (BOM) setup',
       'Batch-wise stock aging & expiry date alerts',
@@ -20,7 +20,7 @@ const industries = [
     id: 'distribution',
     title: 'Wholesale & FMCG Distribution',
     description: 'Multi-tier price list structures, customer credit limit enforcement, salesman commission tracking, automated e-Way Bill, and e-Invoice API voucher generation.',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_distribution.jpg',
     deliverables: [
       'Automated e-Way Bill & e-Invoicing portal sync',
       'Multi-tier price lists & bulk discount schemes',
@@ -31,7 +31,7 @@ const industries = [
     id: 'retail',
     title: 'Retail Outlets & POS Outlets',
     description: 'Fast POS invoice entry, barcode scanner integration, split cash/UPI/card payment collection, daily counter cash balance reports, and stock audit sheets.',
-    image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_retail.jpg',
     deliverables: [
       'Barcode scanner & thermal receipt printer setup',
       'Split payment checkout (Cash + UPI + Card)',
@@ -42,7 +42,7 @@ const industries = [
     id: 'services',
     title: 'Corporate & Service Agencies',
     description: 'Statutory Service GST compliance, automated client TDS deduction tracking, retainer invoice scheduling, and direct client ledger statement dispatch.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_corporate.jpg',
     deliverables: [
       'Service GST e-Invoicing & SAC master setup',
       'Automated client TDS deduction ledger tracking',
@@ -53,7 +53,7 @@ const industries = [
     id: 'trade',
     title: 'Export & Import Enterprises',
     description: 'Multi-currency ledger entries, automated forex gain/loss calculation, LUT shipping bill vouchers, and foreign remittance bank realization vouchers.',
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=85',
+    image: '/images/ind_export.jpg',
     deliverables: [
       'Multi-currency transaction & forex gain/loss',
       'Letter of Undertaking (LUT) & shipping bills',

@@ -49,7 +49,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5 sticky top-28 space-y-6">
               <div className="relative h-[440px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group">
                 <Image
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85"
+                  src="/images/sbe_tally_partner.jpg"
                   alt="S.B. Enterprise Kolkata Office"
                   fill
                   priority
