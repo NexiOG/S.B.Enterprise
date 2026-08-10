@@ -17,7 +17,7 @@ export default function CompanyIntro() {
           <div className="lg:col-span-5 space-y-6">
             <div className="relative h-[440px] sm:h-[500px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group">
               <Image
-                src="/images/sbe_tally_partner.jpg"
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85"
                 alt="S.B. Enterprise - Authorized Tally Solutions Partner Kolkata"
                 fill
                 priority

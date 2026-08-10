@@ -15,7 +15,7 @@ const caseStudies = [
     title: 'Manufacturing BOM & Multi-Godown Automation',
     industry: 'Manufacturing & Industrial Fabrication',
     location: 'Howrah Industrial Belt, West Bengal',
-    image: '/images/ind_manufacturing.jpg',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85',
     challenge: 'A multi-unit steel fabrication plant was struggling with inaccurate Raw Material Bill of Materials (BOM) tracking and manual multi-godown ledger reconciliations across 4 factories.',
     solution: 'Engineered a custom TDL module for TallyPrime Gold, integrating automated Job Work manufacturing vouchers, multi-godown stock transfer rules, and real-time scrap loss calculations.',
     results: [
@@ -29,7 +29,7 @@ const caseStudies = [
     title: 'Wholesale Distribution & Dynamic UPI QR Invoicing',
     industry: 'Wholesale & FMCG Distribution',
     location: 'Burrabazar & Posta, Kolkata',
-    image: '/images/ind_distribution.jpg',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85',
     challenge: 'A major FMCG distributor managing 1,200+ retail accounts experienced outstanding payment collection delays due to static bank transfer details on paper tax invoices.',
     solution: 'Deployed custom TDL for TallyPrime with dynamic bank UPI QR codes generated directly on tax invoice PDFs, alongside 24*7 remote AnyDesk support SLA.',
     results: [
@@ -43,7 +43,7 @@ const caseStudies = [
     title: 'Multi-Store Retail POS & Central Accounting Sync',
     industry: 'Retail & Consumer Outlets',
     location: 'Kolkata & Salt Lake Outlets',
-    image: '/images/ind_retail.jpg',
+    image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=85',
     challenge: 'A growing apparel retail chain required real-time daily sales sync between 5 outlet POS billing counters and their central Tally accounting server.',
     solution: 'Built a custom Next.js web portal with REST API synchronization connecting daily POS cash register totals directly to central Tally company data.',
     results: [

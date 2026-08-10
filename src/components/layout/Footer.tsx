@@ -14,7 +14,7 @@ export default function Footer() {
       {/* Crisp Corporate Background Photography Overlay with Subtle Dark Mask */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <Image
-          src="/images/sbe_tally_partner.jpg"
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=85"
           alt="S.B. Enterprise Kolkata Operations Background"
           fill
           className="object-cover opacity-40 filter contrast-110 saturate-75"
