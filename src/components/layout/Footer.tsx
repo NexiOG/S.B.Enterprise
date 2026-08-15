@@ -258,35 +258,28 @@ export default function Footer() {
 
       </div>
 
-      {/* Perfectly Fitted & Proportionate Vector Watermark with Smooth Slow Left-to-Right Reveal */}
+      {/* Larger, Prominent Vector Watermark with Ultra-Slow & Smooth Left-to-Right Reveal */}
       <div
         ref={watermarkRef}
-        className="w-full pt-16 pb-4 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-6 sm:px-10 lg:px-16"
+        className="w-full pt-16 pb-2 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-2 sm:px-4"
       >
-        <div className="w-full max-w-6xl mx-auto flex items-center justify-center">
+        <div className="w-full max-w-[94vw] mx-auto flex items-center justify-center">
           <svg
-            viewBox="0 0 1100 130"
-            className="w-full h-auto max-h-[140px] overflow-visible"
+            viewBox="0 0 1100 120"
+            className="w-full h-auto max-h-[170px] overflow-visible"
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              {/* Luminous Gold Gradient */}
-              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.85" />
-                <stop offset="40%" stopColor="#FEF3C7" stopOpacity="0.95" />
-                <stop offset="70%" stopColor="#FDE68A" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#D97706" stopOpacity="0.85" />
-              </linearGradient>
-
-              {/* Shimmer Light Gradient */}
-              <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#FBBF24" />
-                <stop offset="50%" stopColor="#FFFFFF" />
-                <stop offset="100%" stopColor="#F59E0B" />
+              {/* Luminous High-Contrast Gold Gradient */}
+              <linearGradient id="goldGradientLarge" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.9" />
+                <stop offset="35%" stopColor="#FEF3C7" stopOpacity="1" />
+                <stop offset="65%" stopColor="#FDE68A" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#D97706" stopOpacity="0.9" />
               </linearGradient>
             </defs>
 
-            {/* Slow Left-to-Right Unmasking Animation */}
+            {/* Ultra-Slow, Smooth Left-to-Right Unmasking Animation (4.2s) */}
             <motion.g
               initial={{ clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)', opacity: 0 }}
               animate={{
@@ -294,21 +287,21 @@ export default function Footer() {
                 opacity: isInView ? 1 : 0,
               }}
               transition={{
-                duration: 2.6,
+                duration: 4.2,
                 ease: [0.16, 1, 0.3, 1],
-                delay: 0.15,
+                delay: 0.2,
               }}
             >
               <text
                 x="50%"
                 y="80%"
                 textAnchor="middle"
-                fill="url(#goldGradient)"
-                className="font-display font-black uppercase tracking-tight"
+                fill="url(#goldGradientLarge)"
+                className="font-display font-black uppercase tracking-normal"
                 style={{
-                  fontSize: '94px',
+                  fontSize: '106px',
                   fontWeight: 900,
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.02em',
                 }}
               >
                 S.B. ENTERPRISE
