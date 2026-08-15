@@ -9,8 +9,8 @@ import { motion, useInView } from 'framer-motion';
 
 export default function Footer() {
   const watermarkRef = useRef<HTMLDivElement>(null);
-  // Trigger as soon as the footer area enters within 150px of viewport
-  const isInView = useInView(watermarkRef, { once: false, margin: '0px 0px 100px 0px', amount: 0.1 });
+  // Trigger reveal when user reaches footer area
+  const isInView = useInView(watermarkRef, { once: false, margin: '0px 0px 80px 0px', amount: 0.1 });
 
   return (
     <footer className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white pt-24 pb-12 relative overflow-hidden border-t border-amber-400/30">
@@ -258,53 +258,63 @@ export default function Footer() {
 
       </div>
 
-      {/* Guaranteed Visible, Slow Left-to-Right Reveal for S.B. ENTERPRISE Typography */}
+      {/* Perfectly Fitted & Proportionate Vector Watermark with Smooth Slow Left-to-Right Reveal */}
       <div
         ref={watermarkRef}
-        className="w-full pt-16 pb-4 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-4"
+        className="w-full pt-16 pb-4 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-6 sm:px-10 lg:px-16"
       >
-        <div className="relative inline-block overflow-hidden">
-          
-          {/* Base High-Visibility Gold Watermark Text */}
-          <motion.span
-            initial={{ opacity: 0.15 }}
-            animate={{ opacity: isInView ? 1 : 0.15 }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="font-display font-black text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[11vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400/80 via-amber-200/90 to-amber-500/80 whitespace-nowrap leading-none text-center uppercase block"
+        <div className="w-full max-w-6xl mx-auto flex items-center justify-center">
+          <svg
+            viewBox="0 0 1100 130"
+            className="w-full h-auto max-h-[140px] overflow-visible"
+            preserveAspectRatio="xMidYMid meet"
           >
-            S.B. ENTERPRISE
-          </motion.span>
+            <defs>
+              {/* Luminous Gold Gradient */}
+              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.85" />
+                <stop offset="40%" stopColor="#FEF3C7" stopOpacity="0.95" />
+                <stop offset="70%" stopColor="#FDE68A" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#D97706" stopOpacity="0.85" />
+              </linearGradient>
 
-          {/* Slow Shimmering Left-to-Right Light Wipe Overlay */}
-          <motion.div
-            initial={{ x: '-105%' }}
-            animate={{ x: isInView ? '105%' : '-105%' }}
-            transition={{
-              duration: 3.2,
-              ease: [0.25, 1, 0.5, 1],
-              delay: 0.2,
-              repeat: Infinity,
-              repeatDelay: 4,
-            }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
-          />
+              {/* Shimmer Light Gradient */}
+              <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#FBBF24" />
+                <stop offset="50%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#F59E0B" />
+              </linearGradient>
+            </defs>
 
-          {/* Left-to-Right Unmasking Layer */}
-          <motion.div
-            initial={{ width: '0%' }}
-            animate={{ width: isInView ? '100%' : '0%' }}
-            transition={{
-              duration: 3.0,
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.1,
-            }}
-            className="absolute top-0 left-0 bottom-0 overflow-hidden pointer-events-none"
-          >
-            <span className="font-display font-black text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[11vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-amber-400 whitespace-nowrap leading-none uppercase block drop-shadow-[0_0_25px_rgba(251,191,36,0.4)]">
-              S.B. ENTERPRISE
-            </span>
-          </motion.div>
-
+            {/* Slow Left-to-Right Unmasking Animation */}
+            <motion.g
+              initial={{ clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)', opacity: 0 }}
+              animate={{
+                clipPath: isInView ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' : 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+                opacity: isInView ? 1 : 0,
+              }}
+              transition={{
+                duration: 2.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.15,
+              }}
+            >
+              <text
+                x="50%"
+                y="80%"
+                textAnchor="middle"
+                fill="url(#goldGradient)"
+                className="font-display font-black uppercase tracking-tight"
+                style={{
+                  fontSize: '94px',
+                  fontWeight: 900,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                S.B. ENTERPRISE
+              </text>
+            </motion.g>
+          </svg>
         </div>
       </div>
 
