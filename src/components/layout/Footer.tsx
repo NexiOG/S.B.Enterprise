@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { companyInfo } from '@/content/company';
 import { Phone, ArrowRight, ShieldCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (
@@ -25,7 +28,13 @@ export default function Footer() {
       </div>
 
       {/* Top Floating Control Dock Widget Bar (Cooldock Style) */}
-      <div className="max-w-5xl mx-auto px-6 mb-16 relative z-20">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-5xl mx-auto px-6 mb-16 relative z-20"
+      >
         <div className="bg-slate-900/95 backdrop-blur-2xl text-white rounded-3xl p-4 sm:p-5 shadow-2xl border border-amber-400/30 flex flex-col md:flex-row items-center justify-between gap-4">
           
           {/* Dock Widget 1: Office Status */}
@@ -52,14 +61,14 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <Link
               href="/support"
-              className="inline-flex items-center gap-2 px-5 py-3 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-3 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-md hover:scale-105"
             >
               <span>Remote Support Portal</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <a
               href={`tel:${companyInfo.contact.phones[0]}`}
-              className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all border border-white/20"
+              className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all border border-white/20 hover:scale-105"
               title="Call Office Desk"
             >
               <Phone className="w-4 h-4 text-amber-400" />
@@ -67,12 +76,18 @@ export default function Footer() {
           </div>
 
         </div>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-16">
         
         {/* Minimalist 4-Column Editorial Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 items-start"
+        >
           
           {/* Column 1: Brand & Summary (4 cols) */}
           <div className="lg:col-span-4 space-y-5">
@@ -92,7 +107,7 @@ export default function Footer() {
             <div className="pt-1">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-6 py-2.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-md"
+                className="inline-flex items-center gap-2.5 px-6 py-2.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-md hover:scale-105"
               >
                 <span>Contact Kolkata Office</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -207,7 +222,7 @@ export default function Footer() {
             </ul>
           </div>
 
-        </div>
+        </motion.div>
 
         {/* Bottom Bar: Exact Left-Corner Copyright & Right-Corner Credit Line */}
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-normal relative z-10">
@@ -238,11 +253,21 @@ export default function Footer() {
 
       </div>
 
-      {/* Perfectly Fitted & Aligned Watermark Text S.B. ENTERPRISE */}
+      {/* Smooth, Slow Cinematic Reveal for S.B. ENTERPRISE Watermark */}
       <div className="w-full pt-16 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-4">
-        <span className="font-display font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-t from-amber-400/80 via-amber-200/45 to-white/10 whitespace-nowrap leading-none text-center uppercase block">
+        <motion.span
+          initial={{ opacity: 0, y: 40, filter: 'blur(12px)', scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{
+            duration: 1.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.15,
+          }}
+          className="font-display font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-t from-amber-400/80 via-amber-200/45 to-white/10 whitespace-nowrap leading-none text-center uppercase block"
+        >
           S.B. ENTERPRISE
-        </span>
+        </motion.span>
       </div>
 
     </footer>
