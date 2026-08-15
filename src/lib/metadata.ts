@@ -31,6 +31,15 @@ export function constructMetadata({
       'Web Development Partner Kolkata',
     ],
     authors: [{ name: companyInfo.name }],
+    icons: {
+      icon: [
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/icon', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
+      ],
+    },
     openGraph: {
       title,
       description,
