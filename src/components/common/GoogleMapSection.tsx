@@ -1,5 +1,8 @@
-import { MapPin, Navigation, Clock, Phone, Mail, Building2, CheckCircle2 } from 'lucide-react';
+'use client';
+
+import { MapPin, Navigation, Clock, Phone, Mail, Building2 } from 'lucide-react';
 import { companyInfo } from '@/content/company';
+import { FadeIn } from '@/components/common/MotionWrapper';
 
 interface GoogleMapSectionProps {
   title?: string;
@@ -13,13 +16,13 @@ export default function GoogleMapSection({
 }: GoogleMapSectionProps) {
   return (
     <section className="py-20 lg:py-28 bg-[#FFFBEB] text-slate-900 border-t border-b border-amber-200/80 relative overflow-hidden">
-      {/* Background Soft Mesh Glow Matching Testimonials */}
+      {/* Background Soft Mesh Glow */}
       <div className="absolute top-0 right-1/3 w-[600px] h-[300px] bg-amber-200/50 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-12">
         
-        {/* Section Header with Natural Non-AI Eyebrow */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        {/* Section Header */}
+        <FadeIn direction="up" className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em] mb-3">
               <span className="w-8 h-[2px] bg-amber-600" />
@@ -32,13 +35,13 @@ export default function GoogleMapSection({
           <p className="text-slate-700 text-sm max-w-md leading-relaxed font-normal">
             {subtitle}
           </p>
-        </div>
+        </FadeIn>
 
         {/* Map & Office Detail Desk Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column: Office Details Card (5 cols) */}
-          <div className="lg:col-span-5 bg-white border-2 border-amber-200/90 rounded-3xl p-8 shadow-md flex flex-col justify-between space-y-8">
+          <FadeIn direction="right" delay={0.1} className="lg:col-span-5 bg-white border-2 border-amber-200/90 rounded-3xl p-8 shadow-md flex flex-col justify-between space-y-8">
             
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-amber-100 pb-4">
@@ -108,15 +111,15 @@ export default function GoogleMapSection({
               href="https://maps.google.com/?q=191+Ashokegarh+Kolkata"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 py-4 px-5 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-2xl transition-all shadow-md cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 py-4 px-5 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-2xl transition-all shadow-md cursor-pointer hover:scale-[1.02]"
             >
               <Navigation className="w-4 h-4 text-amber-400" />
               <span>Get Directions on Google Maps</span>
             </a>
-          </div>
+          </FadeIn>
 
           {/* Right Column: Google Map Iframe Frame (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-amber-200/90 rounded-3xl p-3 shadow-md flex flex-col justify-between">
+          <FadeIn direction="left" delay={0.15} className="lg:col-span-7 bg-white border border-amber-200/90 rounded-3xl p-3 shadow-md flex flex-col justify-between">
             <div className="bg-[#0A0E1A] text-white p-3 rounded-2xl mb-2 flex items-center justify-between text-xs font-semibold px-4">
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />
@@ -137,7 +140,7 @@ export default function GoogleMapSection({
                 title="S.B. Enterprise Kolkata Office Map"
               />
             </div>
-          </div>
+          </FadeIn>
 
         </div>
       </div>

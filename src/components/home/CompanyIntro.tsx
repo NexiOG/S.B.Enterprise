@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Phone, ShieldCheck } from 'lucide-react';
 import { companyInfo } from '@/content/company';
+import { FadeIn } from '@/components/common/MotionWrapper';
+import { motion } from 'framer-motion';
 
 export default function CompanyIntro() {
   return (
@@ -14,8 +18,12 @@ export default function CompanyIntro() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Authorized Tally Partner Photography Card (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="relative h-[440px] sm:h-[500px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group">
+          <FadeIn direction="right" className="lg:col-span-5 space-y-6">
+            <motion.div
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.3 }}
+              className="relative h-[440px] sm:h-[500px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group"
+            >
               <Image
                 src="/images/sbe_tally_partner.jpg"
                 alt="S.B. Enterprise - Authorized Tally Solutions Partner Kolkata"
@@ -39,7 +47,7 @@ export default function CompanyIntro() {
                 <h3 className="text-xl font-bold text-white">S.B. Enterprise Kolkata Desk</h3>
                 <p className="text-xs text-slate-300">Certified Tally Partner & Custom Web Studio.</p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Quick Location & Phone Box */}
             <div className="p-6 bg-white border-2 border-amber-200/90 rounded-3xl space-y-2 shadow-md text-xs">
@@ -47,10 +55,10 @@ export default function CompanyIntro() {
               <div className="font-semibold text-slate-800">{companyInfo.location.fullAddress}</div>
               <div className="font-bold text-amber-900 pt-1">Phone: {companyInfo.contact.phones.join(' / ')}</div>
             </div>
-          </div>
+          </FadeIn>
 
-          {/* Right Column: Paragraph Breaks with Justified Alignment & NO White Background Container (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Right Column: Paragraph Breaks with Justified Alignment (7 cols) */}
+          <FadeIn direction="left" delay={0.15} className="lg:col-span-7 space-y-6">
             
             {/* Header */}
             <div className="space-y-3">
@@ -64,7 +72,7 @@ export default function CompanyIntro() {
               </h2>
             </div>
 
-            {/* Paragraphs with Justified Alignment & NO White Background Box */}
+            {/* Paragraphs with Justified Alignment */}
             <div className="space-y-5 text-slate-800 text-sm sm:text-base leading-relaxed font-normal text-justify">
               <p>
                 S.B. Enterprise is an <strong>Authorized Tally Solutions Partner</strong> headquartered in Ashokegarh, Kolkata, dedicated to providing complete business accounting, statutory GST compliance, and custom digital software solutions to businesses, industrial manufacturers, trading houses, and accounting professionals across West Bengal.
@@ -87,7 +95,7 @@ export default function CompanyIntro() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2.5 px-7 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)]"
+                className="inline-flex items-center gap-2.5 px-7 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] hover:scale-105"
               >
                 <span>Read Full Company Profile</span>
                 <ArrowRight className="w-4 h-4" />
@@ -95,14 +103,14 @@ export default function CompanyIntro() {
 
               <a
                 href={`tel:${companyInfo.contact.phones[0]}`}
-                className="inline-flex items-center gap-2.5 px-6 py-4 text-xs font-bold text-slate-900 bg-white hover:bg-amber-50 border-2 border-amber-300 rounded-full transition-all duration-300"
+                className="inline-flex items-center gap-2.5 px-6 py-4 text-xs font-bold text-slate-900 bg-white hover:bg-amber-50 border-2 border-amber-300 rounded-full transition-all duration-300 hover:scale-105"
               >
                 <Phone className="w-4 h-4 text-amber-700" />
                 <span>Call Support Desk ({companyInfo.contact.phones[0]})</span>
               </a>
             </div>
 
-          </div>
+          </FadeIn>
 
         </div>
       </div>

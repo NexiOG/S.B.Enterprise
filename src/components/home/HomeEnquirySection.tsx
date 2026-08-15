@@ -1,6 +1,9 @@
+'use client';
+
 import EnquiryForm from '@/components/forms/EnquiryForm';
 import { companyInfo } from '@/content/company';
 import { MapPin, Phone, Mail, Clock, ShieldCheck, Sparkles } from 'lucide-react';
+import { FadeIn } from '@/components/common/MotionWrapper';
 
 export default function HomeEnquirySection() {
   return (
@@ -8,7 +11,7 @@ export default function HomeEnquirySection() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-16">
+        <FadeIn direction="up" className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-semibold text-indigo-600 uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             Contact & Enquiries
@@ -19,13 +22,13 @@ export default function HomeEnquirySection() {
           <p className="mt-4 text-slate-600 text-base lg:text-lg leading-relaxed">
             Reach out for TallyPrime licensing, AMC technical support, or Nexiog web software solutions. Our Kolkata team responds within 24 hours.
           </p>
-        </div>
+        </FadeIn>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Direct Info Cards (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <FadeIn direction="right" delay={0.1} className="lg:col-span-5 space-y-6">
             <div className="bg-white rounded-3xl border border-slate-200/80 p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)] space-y-6">
               <h3 className="text-xl font-bold text-slate-950 pb-4 border-b border-slate-100">
                 Direct Contact Desk
@@ -93,7 +96,7 @@ export default function HomeEnquirySection() {
                       Working Hours
                     </span>
                     <span className="font-medium">{companyInfo.contact.hoursDetail.days}: {companyInfo.contact.hoursDetail.time}</span>
-                    <span className="block text-xs text-slate-400 mt-0.5">Sunday: {companyInfo.contact.hoursDetail.sunday}</span>
+                    <span className="block text-xs text-slate-400 mt-0.5">Sunday: {companyInfo.contact.hoursDetail.sunday || 'Closed'}</span>
                   </div>
                 </div>
 
@@ -108,12 +111,12 @@ export default function HomeEnquirySection() {
                 <span className="text-slate-300">All web & email inquiries acknowledged within 1 working day.</span>
               </div>
             </div>
-          </div>
+          </FadeIn>
 
           {/* Right Column: Modern Enquiry Form (7 cols) */}
-          <div className="lg:col-span-7">
+          <FadeIn direction="left" delay={0.15} className="lg:col-span-7">
             <EnquiryForm />
-          </div>
+          </FadeIn>
 
         </div>
       </div>

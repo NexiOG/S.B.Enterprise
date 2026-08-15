@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/common/MotionWrapper';
 
 const industries = [
   {
@@ -68,7 +70,7 @@ export default function IndustriesSection() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-16">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <FadeIn direction="up" className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl space-y-3">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em]">
               <span className="w-8 h-[2px] bg-amber-600" />
@@ -82,62 +84,64 @@ export default function IndustriesSection() {
           <p className="text-slate-700 text-sm max-w-md font-normal leading-relaxed">
             We customize TallyPrime features, voucher entry screens, and statutory GST modules to match the operational demands of your industry sector.
           </p>
-        </div>
+        </FadeIn>
 
         {/* Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {industries.map((ind) => (
-            <div
-              key={ind.id}
-              className="bg-white border-2 border-amber-200/90 rounded-3xl overflow-hidden flex flex-col justify-between shadow-md hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <div>
-                {/* Header Image */}
-                <div className="relative h-48 w-full bg-amber-100 overflow-hidden">
-                  <Image
-                    src={ind.image}
-                    alt={ind.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-                </div>
+            <StaggerItem key={ind.id}>
+              <motion.div
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="bg-white border-2 border-amber-200/90 rounded-3xl overflow-hidden flex flex-col justify-between shadow-md hover:border-amber-500 transition-colors duration-300 group h-full"
+              >
+                <div>
+                  {/* Header Image */}
+                  <div className="relative h-48 w-full bg-amber-100 overflow-hidden">
+                    <Image
+                      src={ind.image}
+                      alt={ind.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+                  </div>
 
-                {/* Content */}
-                <div className="p-8 space-y-4">
-                  <h3 className="font-display text-xl font-extrabold text-slate-950 leading-snug group-hover:text-amber-800 transition-colors">
-                    {ind.title}
-                  </h3>
+                  {/* Content */}
+                  <div className="p-8 space-y-4">
+                    <h3 className="font-display text-xl font-extrabold text-slate-950 leading-snug group-hover:text-amber-800 transition-colors">
+                      {ind.title}
+                    </h3>
 
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    {ind.description}
-                  </p>
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                      {ind.description}
+                    </p>
 
-                  <div className="pt-3 space-y-2 border-t border-amber-100">
-                    <span className="text-[11px] font-extrabold text-slate-950 uppercase block">Key Deliverables:</span>
-                    {ind.deliverables.map((del, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs font-medium text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                        <span>{del}</span>
-                      </div>
-                    ))}
+                    <div className="pt-3 space-y-2 border-t border-amber-100">
+                      <span className="text-[11px] font-extrabold text-slate-950 uppercase block">Key Deliverables:</span>
+                      {ind.deliverables.map((del, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-xs font-medium text-slate-700">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                          <span>{del}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Card Footer CTA */}
-              <div className="px-8 pb-8 pt-0">
-                <Link
-                  href={`/contact?interest=${encodeURIComponent(ind.title)}`}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-slate-950 bg-amber-100 hover:bg-amber-400 border border-amber-300 rounded-xl transition-all duration-300"
-                >
-                  <span>Inquire Industry Solution</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
+                {/* Card Footer CTA */}
+                <div className="px-8 pb-8 pt-0">
+                  <Link
+                    href={`/contact?interest=${encodeURIComponent(ind.title)}`}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-slate-950 bg-amber-100 hover:bg-amber-400 border border-amber-300 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+                  >
+                    <span>Inquire Industry Solution</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/common/MotionWrapper';
 
 const studioOfferings = [
   {
@@ -67,7 +69,7 @@ export default function NexiogSection() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-16">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <FadeIn direction="up" className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl space-y-3">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em]">
               <span className="w-8 h-[2px] bg-amber-600" />
@@ -81,72 +83,74 @@ export default function NexiogSection() {
           <div>
             <Link
               href="/digital"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] shrink-0"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] shrink-0 hover:scale-105"
             >
               <span>Explore Digital Studio</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </div>
+        </FadeIn>
 
         {/* 4 Clean Executive Cards (2x2 Grid) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {studioOfferings.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white border-2 border-amber-200/90 rounded-3xl overflow-hidden flex flex-col justify-between shadow-md hover:border-amber-500 hover:shadow-xl transition-all duration-300 group"
-            >
-              {/* Visual Photography Header */}
-              <div className="relative h-56 w-full bg-slate-950 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                
-                <div className="absolute bottom-4 left-6 right-6">
-                  <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">
-                    {item.subtitle}
-                  </span>
-                  <h3 className="text-xl font-extrabold text-white">
-                    {item.title}
-                  </h3>
+            <StaggerItem key={item.id}>
+              <motion.div
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="bg-white border-2 border-amber-200/90 rounded-3xl overflow-hidden flex flex-col justify-between shadow-md hover:border-amber-500 hover:shadow-xl transition-colors duration-300 group h-full"
+              >
+                {/* Visual Photography Header */}
+                <div className="relative h-56 w-full bg-slate-950 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                  
+                  <div className="absolute bottom-4 left-6 right-6">
+                    <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">
+                      {item.subtitle}
+                    </span>
+                    <h3 className="text-xl font-extrabold text-white">
+                      {item.title}
+                    </h3>
+                  </div>
                 </div>
-              </div>
 
-              {/* Card Body */}
-              <div className="p-8 space-y-6 flex-1 flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  {item.description}
-                </p>
+                {/* Card Body */}
+                <div className="p-8 space-y-6 flex-1 flex flex-col justify-between">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    {item.description}
+                  </p>
 
-                {/* Key Deliverables */}
-                <div className="space-y-2.5 pt-3 border-t border-amber-100 text-xs font-semibold text-slate-900">
-                  {item.deliverables.map((deliv, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                      <span>{deliv}</span>
-                    </div>
-                  ))}
+                  {/* Key Deliverables */}
+                  <div className="space-y-2.5 pt-3 border-t border-amber-100 text-xs font-semibold text-slate-900">
+                    {item.deliverables.map((deliv, idx) => (
+                      <div key={idx} className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                        <span>{deliv}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Card Footer CTA */}
-              <div className="px-8 pb-8 pt-2">
-                <Link
-                  href={`/contact?interest=Digital%20Studio&service=${encodeURIComponent(item.title)}`}
-                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)]"
-                >
-                  <span>Inquire Software Scope</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+                {/* Card Footer CTA */}
+                <div className="px-8 pb-8 pt-2">
+                  <Link
+                    href={`/contact?interest=Digital%20Studio&service=${encodeURIComponent(item.title)}`}
+                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] hover:scale-[1.02]"
+                  >
+                    <span>Inquire Software Scope</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
 
-            </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>
