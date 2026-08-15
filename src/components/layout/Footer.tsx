@@ -1,14 +1,19 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { companyInfo } from '@/content/company';
 import { Phone, ArrowRight, ShieldCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 export default function Footer() {
+  const watermarkRef = useRef<HTMLDivElement>(null);
+  // Trigger as soon as the footer area enters within 150px of viewport
+  const isInView = useInView(watermarkRef, { once: false, margin: '0px 0px 100px 0px', amount: 0.1 });
+
   return (
-    <footer className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white pt-24 pb-16 relative overflow-hidden border-t border-amber-400/30">
+    <footer className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white pt-24 pb-12 relative overflow-hidden border-t border-amber-400/30">
       
       {/* Background Soft Mesh Ambient Glows */}
       <div className="absolute top-0 right-1/4 w-[800px] h-[400px] bg-amber-400/15 blur-[180px] pointer-events-none" />
@@ -253,33 +258,54 @@ export default function Footer() {
 
       </div>
 
-      {/* Slow, Smooth Left-to-Right Reveal for S.B. ENTERPRISE Typography */}
-      <div className="w-full pt-16 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-4">
-        <motion.div
-          initial={{
-            clipPath: 'inset(0% 100% 0% 0%)',
-            opacity: 0,
-            x: -40,
-            filter: 'blur(8px)',
-          }}
-          whileInView={{
-            clipPath: 'inset(0% 0% 0% 0%)',
-            opacity: 1,
-            x: 0,
-            filter: 'blur(0px)',
-          }}
-          viewport={{ once: true, margin: '-20px' }}
-          transition={{
-            duration: 2.8,
-            ease: [0.22, 1, 0.36, 1],
-            delay: 0.2,
-          }}
-          className="inline-block"
-        >
-          <span className="font-display font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400/90 via-amber-200/60 to-white/20 whitespace-nowrap leading-none text-center uppercase block">
+      {/* Guaranteed Visible, Slow Left-to-Right Reveal for S.B. ENTERPRISE Typography */}
+      <div
+        ref={watermarkRef}
+        className="w-full pt-16 pb-4 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-4"
+      >
+        <div className="relative inline-block overflow-hidden">
+          
+          {/* Base High-Visibility Gold Watermark Text */}
+          <motion.span
+            initial={{ opacity: 0.15 }}
+            animate={{ opacity: isInView ? 1 : 0.15 }}
+            transition={{ duration: 1.5, ease: 'easeOut' }}
+            className="font-display font-black text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[11vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400/80 via-amber-200/90 to-amber-500/80 whitespace-nowrap leading-none text-center uppercase block"
+          >
             S.B. ENTERPRISE
-          </span>
-        </motion.div>
+          </motion.span>
+
+          {/* Slow Shimmering Left-to-Right Light Wipe Overlay */}
+          <motion.div
+            initial={{ x: '-105%' }}
+            animate={{ x: isInView ? '105%' : '-105%' }}
+            transition={{
+              duration: 3.2,
+              ease: [0.25, 1, 0.5, 1],
+              delay: 0.2,
+              repeat: Infinity,
+              repeatDelay: 4,
+            }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
+          />
+
+          {/* Left-to-Right Unmasking Layer */}
+          <motion.div
+            initial={{ width: '0%' }}
+            animate={{ width: isInView ? '100%' : '0%' }}
+            transition={{
+              duration: 3.0,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.1,
+            }}
+            className="absolute top-0 left-0 bottom-0 overflow-hidden pointer-events-none"
+          >
+            <span className="font-display font-black text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[11vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-amber-400 whitespace-nowrap leading-none uppercase block drop-shadow-[0_0_25px_rgba(251,191,36,0.4)]">
+              S.B. ENTERPRISE
+            </span>
+          </motion.div>
+
+        </div>
       </div>
 
     </footer>
