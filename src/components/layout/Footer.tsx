@@ -253,21 +253,33 @@ export default function Footer() {
 
       </div>
 
-      {/* Smooth, Slow Cinematic Reveal for S.B. ENTERPRISE Watermark */}
+      {/* Slow, Smooth Left-to-Right Reveal for S.B. ENTERPRISE Typography */}
       <div className="w-full pt-16 select-none pointer-events-none overflow-hidden flex items-center justify-center text-center z-10 relative px-4">
-        <motion.span
-          initial={{ opacity: 0, y: 40, filter: 'blur(12px)', scale: 0.94 }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+        <motion.div
+          initial={{
+            clipPath: 'inset(0% 100% 0% 0%)',
+            opacity: 0,
+            x: -40,
+            filter: 'blur(8px)',
+          }}
+          whileInView={{
+            clipPath: 'inset(0% 0% 0% 0%)',
+            opacity: 1,
+            x: 0,
+            filter: 'blur(0px)',
+          }}
           viewport={{ once: true, margin: '-20px' }}
           transition={{
-            duration: 1.8,
-            ease: [0.16, 1, 0.3, 1],
-            delay: 0.15,
+            duration: 2.8,
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.2,
           }}
-          className="font-display font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-t from-amber-400/80 via-amber-200/45 to-white/10 whitespace-nowrap leading-none text-center uppercase block"
+          className="inline-block"
         >
-          S.B. ENTERPRISE
-        </motion.span>
+          <span className="font-display font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10vw] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400/90 via-amber-200/60 to-white/20 whitespace-nowrap leading-none text-center uppercase block">
+            S.B. ENTERPRISE
+          </span>
+        </motion.div>
       </div>
 
     </footer>
