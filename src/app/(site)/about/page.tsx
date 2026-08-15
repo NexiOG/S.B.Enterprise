@@ -2,9 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { constructMetadata } from '@/lib/metadata';
 import { companyInfo } from '@/content/company';
-import { ArrowRight, CheckCircle2, ShieldCheck, Award, MapPin, Users, Phone, Mail, Clock, Layers, Cpu, Code2, QrCode } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import ClientTestimonials from '@/components/home/ClientTestimonials';
 import GoogleMapSection from '@/components/common/GoogleMapSection';
+import { FadeIn, PageHeaderReveal, StaggerContainer, StaggerItem, InteractiveCard } from '@/components/common/MotionWrapper';
 
 export const metadata = constructMetadata({
   title: 'About Us | S.B. Enterprise — Authorized Tally Partner in Kolkata',
@@ -19,24 +20,14 @@ export default function AboutPage() {
       {/* Page Hero - Dark Dual-Tone */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[750px] h-[400px] bg-gradient-to-br from-amber-500/15 via-emerald-500/15 to-transparent blur-[140px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>AUTHORISED TALLY SOLUTIONS PARTNER · KOLKATA HEADQUARTERS</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            S.B. Enterprise: Authorized Tally Partner & Digital Studio.
-          </h1>
-          <p className="text-slate-300 text-lg max-w-3xl leading-relaxed font-normal">
-            We are experienced IT dealers and software engineers in Kolkata who assist organizations across West Bengal with business accounting, TallyPrime licensing, GST compliance, AnyDesk AMC support SLAs, and custom web applications.
-          </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            {['Kolkata Location', 'Authorized Tally Partner', '24–48h Support SLA', 'Mon–Sat, 10am–7pm'].map((tag) => (
-              <span key={tag} className="px-4 py-1.5 text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="AUTHORISED TALLY SOLUTIONS PARTNER · KOLKATA HEADQUARTERS"
+            title="S.B. Enterprise: Authorized Tally Partner &"
+            highlightText="Digital Studio."
+            description="We are experienced IT dealers and software engineers in Kolkata who assist organizations across West Bengal with business accounting, TallyPrime licensing, GST compliance, AnyDesk AMC support SLAs, and custom web applications."
+            tags={['Kolkata Location', 'Authorized Tally Partner', '24–48h Support SLA', 'Mon–Sat, 10am–7pm']}
+          />
         </div>
       </section>
 
@@ -46,8 +37,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
             {/* Left Column: Office Photography & Credentials (5 cols) */}
-            <div className="lg:col-span-5 sticky top-28 space-y-6">
-              <div className="relative h-[440px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group">
+            <FadeIn direction="right" className="lg:col-span-5 sticky top-28 space-y-6">
+              <InteractiveCard className="relative h-[440px] rounded-3xl overflow-hidden border-2 border-amber-300/80 shadow-2xl group">
                 <Image
                   src="/images/sbe_tally_partner.jpg"
                   alt="S.B. Enterprise Kolkata Office"
@@ -67,7 +58,7 @@ export default function AboutPage() {
                   <h3 className="text-xl font-bold text-white">S.B. Enterprise Operations</h3>
                   <p className="text-xs text-slate-300">191, Ashokegarh, Near Post Office, Kolkata - 700108</p>
                 </div>
-              </div>
+              </InteractiveCard>
 
               {/* Direct Desk Info */}
               <div className="p-6 bg-white border-2 border-amber-200/90 rounded-3xl space-y-3 shadow-md">
@@ -81,10 +72,10 @@ export default function AboutPage() {
                 </div>
                 <div className="text-xs text-slate-600 pt-1">Email: {companyInfo.contact.email}</div>
               </div>
-            </div>
+            </FadeIn>
 
             {/* Right Column: Detailed Story Paragraphs (7 cols) */}
-            <div className="lg:col-span-7 space-y-8">
+            <FadeIn direction="left" delay={0.12} className="lg:col-span-7 space-y-8">
               
               <div className="space-y-3">
                 <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em]">
@@ -134,7 +125,7 @@ export default function AboutPage() {
               {/* Core Values / Deliverable Checklist */}
               <div className="space-y-3 pt-4 border-t border-amber-200/80">
                 <span className="text-xs font-bold text-amber-900 uppercase tracking-widest block">OUR GUARANTEED CORE CREDENTIALS:</span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     'Authorized Tally Solutions Partner in Kolkata',
                     'Same-day remote AnyDesk licensing setup',
@@ -143,26 +134,28 @@ export default function AboutPage() {
                     '100% GST, e-Way Bill & e-Invoicing compliance',
                     'In-house Next.js web & mobile app studio',
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 text-xs font-bold text-slate-900 bg-white p-3 rounded-xl border border-amber-200">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                      <span>{item}</span>
-                    </div>
+                    <StaggerItem key={idx}>
+                      <div className="flex items-center gap-2.5 text-xs font-bold text-slate-900 bg-white p-3 rounded-xl border border-amber-200 shadow-2xs hover:border-amber-400 transition-colors">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </div>
 
               {/* Contact Button */}
               <div className="pt-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)]"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] hover:scale-105"
                 >
                   <span>Contact Our Kolkata Desk</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 
-            </div>
+            </FadeIn>
 
           </div>
         </div>

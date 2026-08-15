@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChevronLeft, ChevronRight, ShieldCheck, Sparkles, PhoneCall } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, ShieldCheck, PhoneCall } from 'lucide-react';
 import { getImageAsset } from '@/lib/images';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SlideData {
   id: number;
@@ -84,6 +85,8 @@ const slides: SlideData[] = [
     ],
   },
 ];
+
+const smoothEase = [0.16, 1, 0.3, 1];
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
@@ -166,61 +169,76 @@ export default function HeroCarousel() {
       <div className="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 py-20 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Hero Content */}
+          {/* Left Column: Hero Content with AnimatePresence */}
           <div className="lg:col-span-8 space-y-8">
-            
-            {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-xs font-semibold text-indigo-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              {slide.badge}
-            </div>
-
-            {/* Headline */}
-            <div className="space-y-2">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                {slide.headline}
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-amber-200">
-                  {slide.highlightText}
-                </span>
-              </h1>
-            </div>
-
-            {/* Description */}
-            <p className="text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
-              {slide.description}
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                href={slide.cta.href}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:-translate-y-0.5"
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slide.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.45, ease: smoothEase }}
+                className="space-y-8"
               >
-                {slide.cta.label}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href={slide.secondaryCta.href}
-                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 hover:text-white border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm transition-all hover:bg-white/10"
-              >
-                {slide.secondaryCta.label}
-              </Link>
-            </div>
-
-            {/* Quick Stat Bar inside Hero */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-xl">
-              {slide.stats.map((st, i) => (
-                <div key={i}>
-                  <div className="text-xs text-slate-400 font-medium">{st.label}</div>
-                  <div className="text-sm font-bold text-white mt-0.5">{st.val}</div>
+                {/* Pill Badge */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-xs font-semibold text-indigo-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  {slide.badge}
                 </div>
-              ))}
-            </div>
+
+                {/* Headline */}
+                <div className="space-y-2">
+                  <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+                    {slide.headline}
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-amber-200">
+                      {slide.highlightText}
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <p className="text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
+                  {slide.description}
+                </p>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link
+                    href={slide.cta.href}
+                    className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:scale-105"
+                  >
+                    {slide.cta.label}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href={slide.secondaryCta.href}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 hover:text-white border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105"
+                  >
+                    {slide.secondaryCta.label}
+                  </Link>
+                </div>
+
+                {/* Quick Stat Bar inside Hero */}
+                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-xl">
+                  {slide.stats.map((st, i) => (
+                    <div key={i}>
+                      <div className="text-xs text-slate-400 font-medium">{st.label}</div>
+                      <div className="text-sm font-bold text-white mt-0.5">{st.val}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Right Column: Interactive Card Preview Badge */}
           <div className="hidden lg:block lg:col-span-4">
-            <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-6 shadow-2xl space-y-5">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
+              className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-6 shadow-2xl space-y-5"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
@@ -244,12 +262,12 @@ export default function HeroCarousel() {
 
               <a
                 href="tel:+917059574585"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-white/10 hover:bg-white/15 text-white font-medium text-xs rounded-xl border border-white/10 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-white/10 hover:bg-white/15 text-white font-medium text-xs rounded-xl border border-white/10 transition-all hover:scale-[1.02]"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-indigo-300" />
                 <span>Call +91-7059574585</span>
               </a>
-            </div>
+            </motion.div>
           </div>
 
         </div>
@@ -282,14 +300,14 @@ export default function HeroCarousel() {
             <div className="flex items-center gap-2">
               <button
                 onClick={prev}
-                className="p-2 rounded-lg border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all cursor-pointer"
+                className="p-2 rounded-lg border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all cursor-pointer hover:scale-105"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={next}
-                className="p-2 rounded-lg border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all cursor-pointer"
+                className="p-2 rounded-lg border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all cursor-pointer hover:scale-105"
                 aria-label="Next slide"
               >
                 <ChevronRight className="w-4 h-4" />

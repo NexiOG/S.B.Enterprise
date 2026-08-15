@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { companyInfo } from '@/content/company';
-import { ShieldCheck, Phone, Mail, Clock, ArrowRight, Monitor, LifeBuoy, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, Phone, Mail, Clock, ArrowRight, Monitor, LifeBuoy } from 'lucide-react';
+import { FadeIn, PageHeaderReveal, InteractiveCard } from '@/components/common/MotionWrapper';
 
 export const metadata: Metadata = {
   title: '24*7 Remote Support Portal (AnyDesk / UltraViewer) | S.B. Enterprise Kolkata',
@@ -15,17 +15,13 @@ export default function SupportPage() {
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-20 lg:py-28 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[600px] h-[300px] bg-amber-500/10 blur-[150px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>24*7 REMOTE DESK SLA</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            24*7 AnyDesk & UltraViewer Remote Support Desk
-          </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed font-normal">
-            Instant technical assistance for TallyPrime licensing, database repair, GST invoice TDL adjustments, and multi-user LAN troubleshooting across Kolkata and West Bengal.
-          </p>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="24*7 REMOTE DESK SLA"
+            title="24*7 AnyDesk & UltraViewer"
+            highlightText="Remote Support Desk"
+            description="Instant technical assistance for TallyPrime licensing, database repair, GST invoice TDL adjustments, and multi-user LAN troubleshooting across Kolkata and West Bengal."
+          />
         </div>
       </section>
 
@@ -34,7 +30,7 @@ export default function SupportPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Form: Support Ticket Request (7 cols) */}
-          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 space-y-6 shadow-2xl">
+          <FadeIn direction="right" className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 space-y-6 shadow-2xl">
             <div>
               <h2 className="font-display text-2xl font-bold text-white flex items-center gap-2">
                 <Monitor className="w-5 h-5 text-amber-400" />
@@ -53,7 +49,7 @@ export default function SupportPage() {
                     type="text"
                     required
                     placeholder="Enter your name or firm"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
@@ -62,7 +58,7 @@ export default function SupportPage() {
                     type="tel"
                     required
                     placeholder="+91 98300 00000"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -70,7 +66,7 @@ export default function SupportPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-slate-300 font-bold mb-1.5">Remote Software Used *</label>
-                  <select className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none">
+                  <select className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors">
                     <option value="anydesk">AnyDesk (Recommended)</option>
                     <option value="ultraviewer">UltraViewer</option>
                     <option value="teamviewer">TeamViewer</option>
@@ -83,7 +79,7 @@ export default function SupportPage() {
                     type="text"
                     required
                     placeholder="e.g. 123 456 789"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -94,12 +90,12 @@ export default function SupportPage() {
                   <input
                     type="text"
                     placeholder="e.g. 700123456"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
                   <label className="block text-slate-300 font-bold mb-1.5">Issue Severity *</label>
-                  <select className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none">
+                  <select className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors">
                     <option value="critical">Critical: Billing / Invoice Stoppage</option>
                     <option value="high">High: Tally Data Sync / LAN Error</option>
                     <option value="medium">Medium: TDL / Report Modification</option>
@@ -114,14 +110,14 @@ export default function SupportPage() {
                   rows={4}
                   required
                   placeholder="Describe your Tally error message or support requirement..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-xl cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-xl cursor-pointer hover:scale-105"
                 >
                   <span>Submit Ticket to Kolkata Remote Desk</span>
                   <ArrowRight className="w-4 h-4" />
@@ -132,12 +128,12 @@ export default function SupportPage() {
                 24*7 Remote desk engineer response guarantee for active AMC clients.
               </p>
             </form>
-          </div>
+          </FadeIn>
 
           {/* Right Info: Desk Direct Numbers (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <FadeIn direction="left" delay={0.12} className="lg:col-span-5 space-y-6">
             
-            <div className="bg-slate-900 border border-amber-500/30 rounded-3xl p-8 space-y-6 shadow-2xl">
+            <InteractiveCard className="bg-slate-900 border border-amber-500/30 rounded-3xl p-8 space-y-6 shadow-2xl">
               <div className="flex items-center gap-3 text-amber-400 font-bold text-base">
                 <LifeBuoy className="w-5 h-5 shrink-0" />
                 <span>Immediate Desk Hotline</span>
@@ -152,7 +148,7 @@ export default function SupportPage() {
                   <a
                     key={phone}
                     href={`tel:${phone}`}
-                    className="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 hover:border-amber-400 rounded-2xl transition-all font-bold text-white group"
+                    className="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 hover:border-amber-400 rounded-2xl transition-all font-bold text-white group hover:scale-[1.02]"
                   >
                     <div className="flex items-center gap-3">
                       <Phone className="w-4 h-4 text-amber-400" />
@@ -175,7 +171,7 @@ export default function SupportPage() {
                   <span>Mon–Sat: 10:00 AM – 7:00 PM (Desk Open)</span>
                 </div>
               </div>
-            </div>
+            </InteractiveCard>
 
             <div className="bg-amber-400/10 border border-amber-400/30 rounded-3xl p-6 text-xs space-y-2 text-amber-200">
               <div className="font-bold text-amber-400 flex items-center gap-2">
@@ -187,7 +183,7 @@ export default function SupportPage() {
               </p>
             </div>
 
-          </div>
+          </FadeIn>
 
         </div>
       </section>

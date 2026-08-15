@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { companyInfo } from '@/content/company';
-import { ShieldCheck, ArrowRight, Building2, CheckCircle2, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { FadeIn, PageHeaderReveal, StaggerContainer, StaggerItem, InteractiveCard } from '@/components/common/MotionWrapper';
 
 export const metadata: Metadata = {
   title: 'Client Case Studies & Enterprise Projects | S.B. Enterprise Kolkata',
@@ -61,17 +61,13 @@ export default function CaseStudiesPage() {
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-20 lg:py-28 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[600px] h-[300px] bg-amber-500/10 blur-[150px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>REAL-WORLD ENTERPRISE IMPACT</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            Client Success Stories & Enterprise Builds
-          </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed font-normal">
-            Discover how S.B. Enterprise empowers manufacturing plants, wholesale distributors, and retail chains across West Bengal with genuine TallyPrime licensing, custom TDLs, and Next.js web applications.
-          </p>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="REAL-WORLD ENTERPRISE IMPACT"
+            title="Client Success Stories &"
+            highlightText="Enterprise Builds"
+            description="Discover how S.B. Enterprise empowers manufacturing plants, wholesale distributors, and retail chains across West Bengal with genuine TallyPrime licensing, custom TDLs, and Next.js web applications."
+          />
         </div>
       </section>
 
@@ -79,80 +75,84 @@ export default function CaseStudiesPage() {
       <section className="py-20 lg:py-28 bg-[#0A0E1A] border-b border-amber-500/20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-16">
           
-          {caseStudies.map((study, idx) => (
-            <div
-              key={study.id}
-              className="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center hover:border-amber-500/40 transition-all duration-300 shadow-2xl"
-            >
-              {/* Image Column (5 cols) */}
-              <div className="lg:col-span-5 relative h-[320px] rounded-2xl overflow-hidden border border-slate-800">
-                <Image
-                  src={study.image}
-                  alt={study.title}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-4 left-4 right-4 text-xs">
-                  <span className="px-3 py-1 bg-amber-400 text-slate-950 font-bold rounded-full text-[10px]">
-                    {study.industry}
-                  </span>
-                  <p className="text-slate-300 font-medium mt-2">{study.location}</p>
-                </div>
-              </div>
-
-              {/* Text Content Column (7 cols) */}
-              <div className="lg:col-span-7 space-y-6">
-                <div>
-                  <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                    {study.title}
-                  </h2>
-                </div>
-
-                <div className="space-y-4 text-xs sm:text-sm text-slate-300 font-normal">
-                  <div>
-                    <span className="font-bold text-amber-400 block mb-1">Business Challenge:</span>
-                    <p className="leading-relaxed">{study.challenge}</p>
+          <StaggerContainer staggerDelay={0.15} className="space-y-12">
+            {caseStudies.map((study) => (
+              <StaggerItem key={study.id}>
+                <InteractiveCard
+                  lift={-4}
+                  className="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center hover:border-amber-500/40 transition-colors duration-300 shadow-2xl"
+                >
+                  {/* Image Column (5 cols) */}
+                  <div className="lg:col-span-5 relative h-[320px] rounded-2xl overflow-hidden border border-slate-800">
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-4 left-4 right-4 text-xs">
+                      <span className="px-3 py-1 bg-amber-400 text-slate-950 font-bold rounded-full text-[10px]">
+                        {study.industry}
+                      </span>
+                      <p className="text-slate-300 font-medium mt-2">{study.location}</p>
+                    </div>
                   </div>
 
-                  <div>
-                    <span className="font-bold text-amber-400 block mb-1">Our Partner Solution:</span>
-                    <p className="leading-relaxed">{study.solution}</p>
+                  {/* Text Content Column (7 cols) */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <div>
+                      <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                        {study.title}
+                      </h2>
+                    </div>
+
+                    <div className="space-y-4 text-xs sm:text-sm text-slate-300 font-normal">
+                      <div>
+                        <span className="font-bold text-amber-400 block mb-1">Business Challenge:</span>
+                        <p className="leading-relaxed">{study.challenge}</p>
+                      </div>
+
+                      <div>
+                        <span className="font-bold text-amber-400 block mb-1">Our Partner Solution:</span>
+                        <p className="leading-relaxed">{study.solution}</p>
+                      </div>
+
+                      <div className="pt-2">
+                        <span className="font-bold text-emerald-400 block mb-2">Key Measurable Results:</span>
+                        <ul className="space-y-2">
+                          {study.results.map((res, i) => (
+                            <li key={i} className="flex items-start gap-2.5 text-xs text-slate-200">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                              <span>{res}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-800">
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:scale-105"
+                      >
+                        <span>Request Similar Scope for Your Business</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
                   </div>
 
-                  <div className="pt-2">
-                    <span className="font-bold text-emerald-400 block mb-2">Key Measurable Results:</span>
-                    <ul className="space-y-2">
-                      {study.results.map((res, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs text-slate-200">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{res}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-800">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 px-6 py-3 rounded-full transition-all duration-300 shadow-md"
-                  >
-                    <span>Request Similar Scope for Your Business</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-            </div>
-          ))}
+                </InteractiveCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
 
         </div>
       </section>
 
       {/* CTA Callout */}
       <section className="py-20 bg-slate-900 border-t border-slate-800">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
+        <FadeIn direction="up" className="max-w-4xl mx-auto px-6 text-center space-y-6">
           <h2 className="font-display text-3xl font-bold text-white">
             Have a custom accounting or software requirement?
           </h2>
@@ -162,13 +162,13 @@ export default function CaseStudiesPage() {
           <div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-xl"
+              className="inline-flex items-center gap-2 px-8 py-4 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-full transition-all duration-300 shadow-xl hover:scale-105"
             >
               <span>Contact Kolkata Desk</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
     </main>

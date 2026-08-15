@@ -4,13 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowRight, Globe, Paintbrush, Smartphone, Search, Code2, Server,
-  CheckCircle2, Sparkles, Terminal, Zap, ShieldCheck, ChevronDown,
-  Clock, Check, Layers, Database, Lock, Cpu, Monitor, Cloud,
-  Wifi, Shield, Headphones, BarChart3, Palette, Layout,
-  Rocket, Settings, Users, FileCode, BrainCircuit,
+  Check, ChevronDown, BarChart3, Terminal,
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ClientTestimonials from '@/components/home/ClientTestimonials';
 import GoogleMapSection from '@/components/common/GoogleMapSection';
+import { FadeIn, PageHeaderReveal, StaggerContainer, StaggerItem, InteractiveCard } from '@/components/common/MotionWrapper';
 
 /* ─── NexiOG Service Catalogue ─── */
 
@@ -176,40 +175,30 @@ export default function DigitalPage() {
       {/* ── Hero Section ── */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[750px] h-[400px] bg-gradient-to-br from-amber-500/15 via-emerald-500/15 to-transparent blur-[140px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>POWERED BY NEXIOG TECHNOLOGIES</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            We Engineer the Tech.<br />
-            <span className="text-amber-400">You Capture the Market.</span>
-          </h1>
-          <p className="text-slate-300 text-lg max-w-3xl leading-relaxed font-normal">
-            From concept to launch — high-performance websites, custom software, mobile applications, IT infrastructure, and digital marketing strategies that drive measurable business growth.
-          </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            {['Web Development', 'Web Design', 'App Development', 'SEO & Marketing', 'Custom Software', 'IT Solutions'].map((tag) => (
-              <span key={tag} className="px-4 py-1.5 text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Link
-              href="/contact?interest=Digital%20Studio"
-              className="px-7 py-3.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all"
-            >
-              Get a Proposal
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#services"
-              className="px-7 py-3.5 bg-white/5 hover:bg-white/10 text-white font-bold text-sm rounded-xl border border-white/10 flex items-center gap-2 transition-all"
-            >
-              View Services
-            </a>
-          </div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="POWERED BY NEXIOG TECHNOLOGIES"
+            title="We Engineer the Tech."
+            highlightText="You Capture the Market."
+            description="From concept to launch — high-performance websites, custom software, mobile applications, IT infrastructure, and digital marketing strategies that drive measurable business growth."
+            tags={['Web Development', 'Web Design', 'App Development', 'SEO & Marketing', 'Custom Software', 'IT Solutions']}
+          >
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Link
+                href="/contact?interest=Digital%20Studio"
+                className="px-7 py-3.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all hover:scale-105"
+              >
+                Get a Proposal
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="#services"
+                className="px-7 py-3.5 bg-white/5 hover:bg-white/10 text-white font-bold text-sm rounded-xl border border-white/10 flex items-center gap-2 transition-all hover:scale-105"
+              >
+                View Services
+              </a>
+            </div>
+          </PageHeaderReveal>
         </div>
       </section>
 
@@ -217,7 +206,7 @@ export default function DigitalPage() {
       <section id="services" className="bg-[#FFFBEB] text-slate-900 py-20 lg:py-28 border-b border-amber-200/80 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
 
-          <div>
+          <FadeIn direction="up">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em] mb-3">
               <span className="w-8 h-[2px] bg-amber-600" />
               <span>OUR SERVICES</span>
@@ -228,94 +217,106 @@ export default function DigitalPage() {
             <p className="text-sm text-slate-600 mt-2 max-w-2xl font-normal leading-relaxed">
               Select a service below to explore technical specifications, features, and our development process.
             </p>
-          </div>
+          </FadeIn>
 
           {/* Service Selector Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <StaggerContainer staggerDelay={0.06} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {services.map((s) => {
               const Icon = s.icon;
               const isSelected = selectedService === s.id;
               return (
-                <button
-                  key={s.id}
-                  onClick={() => setSelectedService(s.id)}
-                  className={`p-4 rounded-2xl border text-left flex flex-col justify-between space-y-3 transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-amber-500 text-slate-950 border-amber-600 shadow-md font-extrabold'
-                      : 'bg-white text-slate-800 border-amber-200/80 hover:border-amber-400'
-                  }`}
-                >
-                  <Icon className={`w-5 h-5 ${isSelected ? 'text-slate-950' : 'text-amber-600'}`} />
-                  <span className="text-xs font-bold leading-tight">{s.shortLabel}</span>
-                </button>
+                <StaggerItem key={s.id}>
+                  <motion.button
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => setSelectedService(s.id)}
+                    className={`w-full p-4 rounded-2xl border text-left flex flex-col justify-between space-y-3 transition-colors cursor-pointer ${
+                      isSelected
+                        ? 'bg-amber-500 text-slate-950 border-amber-600 shadow-md font-extrabold'
+                        : 'bg-white text-slate-800 border-amber-200/80 hover:border-amber-400'
+                    }`}
+                  >
+                    <Icon className={`w-5 h-5 ${isSelected ? 'text-slate-950' : 'text-amber-600'}`} />
+                    <span className="text-xs font-bold leading-tight">{s.shortLabel}</span>
+                  </motion.button>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
 
           {/* Active Service Spec Card */}
-          <div className="bg-white border-2 border-amber-200/90 rounded-3xl p-8 lg:p-10 space-y-8 shadow-md">
-            <div className="space-y-3">
-              <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-widest block">
-                SERVICE SPECIFICATION
-              </span>
-              <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-950">{activeService.title}</h3>
-              <p className="text-xs font-bold text-amber-800">{activeService.tagline}</p>
-              <p className="text-sm text-slate-700 leading-relaxed font-normal">{activeService.description}</p>
-            </div>
-
-            {/* Tech Stack Pills */}
-            <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-950 uppercase block">Engineering Stack:</span>
-              <div className="flex flex-wrap gap-2">
-                {activeService.techStack.map((tech) => (
-                  <span key={tech} className="px-3 py-1 bg-amber-50 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Features & Process Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-amber-100">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeService.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-white border-2 border-amber-200/90 rounded-3xl p-8 lg:p-10 space-y-8 shadow-md"
+            >
               <div className="space-y-3">
-                <h4 className="text-sm font-bold text-slate-950 uppercase">Key Features & Capabilities</h4>
-                <div className="space-y-2.5 text-xs text-slate-700">
-                  {activeService.features.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </div>
+                <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-widest block">
+                  SERVICE SPECIFICATION
+                </span>
+                <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-950">{activeService.title}</h3>
+                <p className="text-xs font-bold text-amber-800">{activeService.tagline}</p>
+                <p className="text-sm text-slate-700 leading-relaxed font-normal">{activeService.description}</p>
+              </div>
+
+              {/* Tech Stack Pills */}
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-slate-950 uppercase block">Engineering Stack:</span>
+                <div className="flex flex-wrap gap-2">
+                  {activeService.techStack.map((tech) => (
+                    <span key={tech} className="px-3 py-1 bg-amber-50 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl">
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <h4 className="text-sm font-bold text-slate-950 uppercase">Development Process</h4>
+              {/* Features & Process Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-amber-100">
                 <div className="space-y-3">
-                  {activeService.process.map((step, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-extrabold shrink-0 ${
-                        i === 0 ? 'bg-amber-500 text-slate-950' : 'bg-amber-50 text-amber-800 border border-amber-200'
-                      }`}>
-                        {String(i + 1).padStart(2, '0')}
+                  <h4 className="text-sm font-bold text-slate-950 uppercase">Key Features & Capabilities</h4>
+                  <div className="space-y-2.5 text-xs text-slate-700">
+                    {activeService.features.map((feat, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
                       </div>
-                      <span className="text-xs font-bold text-slate-800">{step}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
-                <div className="pt-4">
-                  <Link
-                    href={`/contact?interest=${encodeURIComponent(activeService.title)}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-xl transition-all shadow-sm"
-                  >
-                    Inquire About {activeService.shortLabel}
-                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-                  </Link>
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-slate-950 uppercase">Development Process</h4>
+                  <div className="space-y-3">
+                    {activeService.process.map((step, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-extrabold shrink-0 ${
+                          i === 0 ? 'bg-amber-500 text-slate-950' : 'bg-amber-50 text-amber-800 border border-amber-200'
+                        }`}>
+                          {String(i + 1).padStart(2, '0')}
+                        </div>
+                        <span className="text-xs font-bold text-slate-800">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-4">
+                    <Link
+                      href={`/contact?interest=${encodeURIComponent(activeService.title)}`}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-xl transition-all shadow-sm hover:scale-105"
+                    >
+                      Inquire About {activeService.shortLabel}
+                      <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
         </div>
       </section>
@@ -323,7 +324,7 @@ export default function DigitalPage() {
       {/* ── Full Tech Stack Section ── */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
-          <div>
+          <FadeIn direction="up">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em] mb-3">
               <span className="w-8 h-[2px] bg-amber-400" />
               <span>ENGINEERING STACK</span>
@@ -334,29 +335,34 @@ export default function DigitalPage() {
             <p className="text-sm text-slate-400 mt-2 max-w-2xl font-normal leading-relaxed">
               Our team works across the full modern stack — frontend frameworks, backend APIs, databases, cloud infrastructure, authentication, and observability tooling.
             </p>
-          </div>
+          </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {techStackGrid.map((group) => (
-              <div key={group.category} className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-4">
-                <h3 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider">{group.category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((tech) => (
-                    <span key={tech} className="px-3 py-1.5 bg-slate-950 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <StaggerItem key={group.category}>
+                <InteractiveCard
+                  lift={-4}
+                  className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 space-y-4 h-full"
+                >
+                  <h3 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider">{group.category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((tech) => (
+                      <span key={tech} className="px-3 py-1.5 bg-slate-950 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </InteractiveCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* ── Project Timeline Estimator ── */}
       <section className="bg-[#FFFBEB] text-slate-900 py-20 lg:py-28 border-b border-amber-200/80">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
-          <div>
+          <FadeIn direction="up">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-800 uppercase tracking-[0.2em] mb-3">
               <span className="w-8 h-[2px] bg-amber-600" />
               <span>TYPICAL TIMELINES</span>
@@ -364,9 +370,9 @@ export default function DigitalPage() {
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-950">
               From brief to launch — how long does it take?
             </h2>
-          </div>
+          </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { label: 'Corporate Website', timeline: '3–4 Weeks', icon: Globe, desc: 'Responsive multi-page website with SEO, CMS, and contact forms.' },
               { label: 'Web Application / SaaS', timeline: '6–10 Weeks', icon: Code2, desc: 'Custom dashboards, portals, and enterprise web software.' },
@@ -377,34 +383,39 @@ export default function DigitalPage() {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.label} className="bg-white border-2 border-amber-200/90 rounded-2xl p-6 space-y-4 shadow-sm hover:border-amber-500 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-center justify-between">
-                    <Icon className="w-5 h-5 text-amber-700" />
-                    <span className="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">{item.timeline}</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-slate-950">{item.label}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">{item.desc}</p>
-                </div>
+                <StaggerItem key={item.label}>
+                  <InteractiveCard
+                    lift={-5}
+                    className="bg-white border-2 border-amber-200/90 rounded-2xl p-6 space-y-4 shadow-xs hover:border-amber-500 transition-colors duration-300 h-full"
+                  >
+                    <div className="flex items-center justify-between">
+                      <Icon className="w-5 h-5 text-amber-700" />
+                      <span className="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">{item.timeline}</span>
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-950">{item.label}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">{item.desc}</p>
+                  </InteractiveCard>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
 
-          <div className="text-center pt-4">
+          <FadeIn direction="up" delay={0.2} className="text-center pt-4">
             <Link
               href="/contact?interest=Digital%20Studio%20Project"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0A0E1A] hover:bg-slate-900 text-white font-bold text-sm rounded-xl shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0A0E1A] hover:bg-slate-900 text-white font-bold text-sm rounded-xl shadow-md transition-all hover:scale-105"
             >
               Get a Custom Scope Quote
               <ArrowRight className="w-4 h-4 text-amber-400" />
             </Link>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* ── FAQs ── */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20">
         <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
-          <div>
+          <FadeIn direction="up">
             <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em] mb-3">
               <span className="w-8 h-[2px] bg-amber-400" />
               <span>FREQUENTLY ASKED</span>
@@ -412,9 +423,9 @@ export default function DigitalPage() {
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white">
               Common questions answered.
             </h2>
-          </div>
+          </FadeIn>
 
-          <div className="space-y-3">
+          <FadeIn direction="up" delay={0.1} className="space-y-3">
             {faqs.map((faq, i) => (
               <div key={i} className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden">
                 <button
@@ -422,16 +433,29 @@ export default function DigitalPage() {
                   className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
                 >
                   <span className="text-sm font-bold text-white pr-4">{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-amber-400 shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <motion.div
+                    animate={{ rotate: openFaq === i ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <ChevronDown className="w-4 h-4 text-amber-400 shrink-0" />
+                  </motion.div>
                 </button>
-                {openFaq === i && (
-                  <div className="px-5 pb-5 pt-0">
-                    <p className="text-xs text-slate-300 leading-relaxed font-normal">{faq.a}</p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {openFaq === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="px-5 pb-5 pt-0"
+                    >
+                      <p className="text-xs text-slate-300 leading-relaxed font-normal">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
-          </div>
+          </FadeIn>
         </div>
       </section>
 

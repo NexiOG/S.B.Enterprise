@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import { constructMetadata } from '@/lib/metadata';
 import { companyInfo } from '@/content/company';
 import EnquiryForm from '@/components/forms/EnquiryForm';
 import GoogleMapSection from '@/components/common/GoogleMapSection';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, Headphones } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck } from 'lucide-react';
+import { FadeIn, PageHeaderReveal, InteractiveCard } from '@/components/common/MotionWrapper';
 
 export const metadata = constructMetadata({
   title: 'Contact Us | S.B. Enterprise — Kolkata Office & Desk',
@@ -24,17 +24,13 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       {/* Page Hero - Dark Dual-Tone */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[750px] h-[400px] bg-gradient-to-br from-amber-500/15 via-emerald-500/15 to-transparent blur-[140px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>AUTHORISED TALLY SOLUTIONS PARTNER · KOLKATA</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            Speak directly with our Kolkata team.
-          </h1>
-          <p className="text-slate-300 text-lg max-w-3xl leading-relaxed font-normal">
-            Whether you need a new TallyPrime license, AMC remote AnyDesk assistance, or a custom web software consultation — we are here to help.
-          </p>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="AUTHORISED TALLY SOLUTIONS PARTNER · KOLKATA"
+            title="Speak directly with our"
+            highlightText="Kolkata team."
+            description="Whether you need a new TallyPrime license, AMC remote AnyDesk assistance, or a custom web software consultation — we are here to help."
+          />
         </div>
       </section>
 
@@ -44,8 +40,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             
             {/* Left: Office Information (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white rounded-3xl border-2 border-amber-200/90 p-8 shadow-md space-y-6">
+            <FadeIn direction="right" className="lg:col-span-5 space-y-6">
+              <InteractiveCard className="bg-white rounded-3xl border-2 border-amber-200/90 p-8 shadow-md space-y-6">
                 <h2 className="text-xl font-bold text-slate-950 pb-4 border-b border-amber-100 flex items-center justify-between">
                   <span>Kolkata Head Office</span>
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -112,7 +108,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </InteractiveCard>
 
               {/* SLA Response Guarantee Box */}
               <div className="p-6 bg-[#0A0E1A] text-white rounded-3xl border border-amber-500/30 flex items-center gap-4 shadow-xl">
@@ -124,12 +120,12 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <span className="text-slate-300">All web enquiries & support calls acknowledged within 1 working day.</span>
                 </div>
               </div>
-            </div>
+            </FadeIn>
 
             {/* Right: Interactive Form (7 cols) */}
-            <div className="lg:col-span-7">
+            <FadeIn direction="left" delay={0.12} className="lg:col-span-7">
               <EnquiryForm defaultInterest={params.interest as any} />
-            </div>
+            </FadeIn>
 
           </div>
         </div>

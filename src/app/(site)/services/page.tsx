@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Layers, Cpu, Code2, FileCheck, Globe, Users, CheckCircle2, ArrowRight, 
-  ShieldCheck, Clock, Phone, Sparkles, Database, Wrench, Check, Search, Filter, Monitor
+  ArrowRight, Check, Search,
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ClientTestimonials from '@/components/home/ClientTestimonials';
 import GoogleMapSection from '@/components/common/GoogleMapSection';
 import CostCalculator from '@/components/common/CostCalculator';
 import TdlPreviewWidget from '@/components/tally/TdlPreviewWidget';
+import { FadeIn, PageHeaderReveal, InteractiveCard } from '@/components/common/MotionWrapper';
 
 const serviceCategories = [
   { id: 'all', label: 'All Services & Products' },
@@ -98,9 +99,9 @@ const comprehensiveCatalogue = [
     sla: '24*7 AnyDesk & UltraViewer Support',
     deliverables: [
       'Full backup and audit of legacy Tally company files',
-      'Seamless data rewrite & migration to TallyPrime format',
-      'Verification of ledger balances, stock units, and GST masters',
-      'Post-migration reconciliation report provided',
+      'Zero voucher loss data migration to TallyPrime format',
+      'Multi-currency and stock item master re-indexing',
+      'Post-migration trial balance & balance sheet verification',
     ],
   },
 
@@ -110,243 +111,131 @@ const comprehensiveCatalogue = [
     category: 'amc',
     categoryName: 'AMC & Technical Desk',
     badge: 'ANNUAL CONTRACT',
-    title: 'Annual Technical Maintenance Contract (AMC)',
-    price: 'Annual Retainer',
-    description: 'Year-round technical insurance covering phone support during business hours and fast AnyDesk remote troubleshooting.',
-    sla: '24*7 AnyDesk & UltraViewer Support',
+    title: 'Annual Maintenance Contract (AMC) for Tally',
+    price: 'From ₹4,500 / Year',
+    description: 'Year-round technical support covering database corruption repair, AnyDesk remote sessions, and regular maintenance.',
+    sla: '24–48h Resolution SLA',
     deliverables: [
-      'Direct phone support line during Kolkata business hours (Mon–Sat)',
-      'Unlimited remote AnyDesk troubleshooting for Tally errors',
-      'Regular database maintenance & data corruption prevention',
-      'Free minor TDL adjustments and voucher layout updates',
+      'Direct phone support line during business hours (Mon–Sat 10am–7pm)',
+      '24*7 remote support through AnyDesk and UltraViewer for emergency downtime',
+      'Corrupted accounting database zero-loss recovery',
+      'Year-end company data split & new financial year setup',
     ],
   },
   {
-    id: 'data-repair',
+    id: 'data-recovery',
     category: 'amc',
     categoryName: 'AMC & Technical Desk',
     badge: 'EMERGENCY SERVICE',
-    title: 'Tally Data Corruption Repair & Emergency Data Recovery',
-    price: 'Per Case Inspection',
-    description: 'Emergency database repair for corrupted Tally company files, out-of-sync vouchers, or improper system shutdowns.',
+    title: 'Emergency Corrupted Data Repair & Re-Write',
+    price: 'Per Incident Scope',
+    description: 'Specialized recovery for damaged, crashed, or improperly split Tally database files with zero ledger data loss.',
     sla: 'Priority Emergency Desk',
     deliverables: [
-      'Emergency extraction & repair of corrupted Tally data files',
-      'Restoration of damaged company ledgers and stock masters',
-      'Splitting large Tally company files by financial year',
-      'Zero-data-loss recovery protocol applied',
-    ],
-  },
-  {
-    id: 'remote-anydesk',
-    category: 'amc',
-    categoryName: 'AMC & Technical Desk',
-    badge: 'ON-DEMAND SUPPORT',
-    title: 'Remote AnyDesk Technical Assistance & Troubleshooting',
-    price: 'Pay-Per-Session / AMC',
-    description: 'Instant remote desktop assistance for voucher posting issues, GST tax calculation errors, and report export fixes.',
-    sla: 'Fast Remote SLA',
-    deliverables: [
-      'Secure remote AnyDesk desktop connectivity',
-      'On-the-spot voucher & tax master error diagnosis',
-      'Printer configuration for custom Tally invoice vouchers',
-      'Immediate resolution confirmation with your accounting team',
-    ],
-  },
-  {
-    id: 'year-end-closure',
-    category: 'amc',
-    categoryName: 'AMC & Technical Desk',
-    badge: 'FINANCIAL SERVICE',
-    title: 'Year-End Book Closure & Financial Year Data Splitting',
-    price: 'Per Financial Year',
-    description: 'Closing financial years, opening new company ledger files, carrying forward stock balances, and archiving historic books.',
-    sla: 'Scheduled Delivery',
-    deliverables: [
-      'Financial year data splitting without affecting old records',
-      'Accurate carry-forward of closing stock & ledger opening balances',
-      'GST & statutory tax series counter reset for the new year',
-      'Archiving past years into secure read-only backup files',
+      'Deep binary repair of corrupted 900.tbd and 500.tbd data structures',
+      'Restoration of damaged company voucher histories and ledgers',
+      'Security audit and automated backup script setup',
+      'Guidance on power outage surge protection and storage health',
     ],
   },
 
   // 3. Custom TDL Engineering
   {
-    id: 'tdl-qr-code',
+    id: 'tdl-qr-invoice',
     category: 'tdl',
     categoryName: 'Custom TDL Engineering',
-    badge: 'PAYMENT INTEGRATION',
-    title: 'UPI Payment QR Code Integration in Sales Invoices',
-    price: 'One-Time License',
-    description: 'Embedding dynamic UPI payment QR codes directly onto printed and PDF sales vouchers for fast customer payments.',
-    sla: '24–48 Hours Delivery',
+    badge: 'FAST PAYMENT SYNC',
+    title: 'Dynamic UPI Payment QR Code Invoice Print TDL',
+    price: 'Fixed Modular Fee',
+    description: 'Automatically embeds bank dynamic UPI QR codes on Tax Invoices for instant mobile payment scanning.',
+    sla: '48h Delivery',
     deliverables: [
-      'Dynamic UPI QR code generation linked to your company bank VPA',
-      'Seamless printing on Tax Invoice, Retail Bill, and Delivery Challans',
-      'Supports GPay, PhonePe, Paytm, and all UPI mobile banking apps',
-      'Reduces collection cycles and speeds up invoice payment receipts',
+      'Dynamic UPI QR code linked directly to invoice amount & bank VPA',
+      'Instant settlement verification via customer mobile UPI apps',
+      'Compatible with Standard Tax Invoice, Retail Bill & POS Print',
+      'Customized bank details and authorized signature placement',
     ],
   },
   {
-    id: 'tdl-invoice-design',
+    id: 'tdl-custom-format',
     category: 'tdl',
     categoryName: 'Custom TDL Engineering',
-    badge: 'VOUCHER CUSTOMIZATION',
-    title: 'Custom Voucher Print Layout & Invoice Branding TDL',
-    price: 'Tailored Scripting',
-    description: 'Customizing sales invoices, purchase orders, and delivery challans with your company logo, bank details, and terms.',
-    sla: '48 Hours Delivery',
+    badge: 'BRANDED FORMAT',
+    title: 'Customized Invoice & Delivery Challan Layouts',
+    price: 'Per Template Scope',
+    description: 'Bespoke voucher print designs featuring your company logo, bank terms, multi-column grids, and statutory declarations.',
+    sla: '3–5 Days',
     deliverables: [
-      'High-resolution company logo branding on all invoice voucher types',
-      'Custom terms & conditions, bank account details, and signature blocks',
-      'Item-wise discount, HSN/SAC column, and batch/expiry formatting',
-      'Available in thermal receipt, half-page A5, and full-page A4 layouts',
-    ],
-  },
-  {
-    id: 'tdl-custom-reports',
-    category: 'tdl',
-    categoryName: 'Custom TDL Engineering',
-    badge: 'MANAGEMENT MODULE',
-    title: 'Custom TDL Management Reports & Executive Dashboards',
-    price: 'Based on Complexity',
-    description: 'Bespoke TDL report modules showing item-wise profit margins, sales rep commission, and stock movement aging.',
-    sla: '3–5 Days Delivery',
-    deliverables: [
-      'Custom executive dashboard reports built directly inside Tally',
-      'Party-wise sales analysis, credit limit tracking, and overdue reminders',
-      'Sales representative commission & regional performance reports',
-      'Exportable to Excel, PDF, and CSV formats with 1-click',
-    ],
-  },
-  {
-    id: 'tdl-security-locks',
-    category: 'tdl',
-    categoryName: 'Custom TDL Engineering',
-    badge: 'CONTROL MODULE',
-    title: 'Voucher Approval Locks & Security Permission Rules',
-    price: 'One-Time Setup',
-    description: 'Enforcing multi-level voucher approval rules, field locking, back-dated entry restriction, and audit trail controls.',
-    sla: '48 Hours Delivery',
-    deliverables: [
-      'Back-dated voucher entry restriction to protect audit integrity',
-      'User-level price & discount editing locks for billing clerks',
-      'Multi-level sales order approval before invoice generation',
-      'Mandatory field verification rules (e.g. mobile no. or GSTIN)',
+      'Tailor-made print layout matching your corporate brand typography',
+      'Batch-wise stock details, expiry dates, and manufacturer codes',
+      'Custom terms & conditions, warranty clauses, and bank details',
+      'Dual-copy (Original for Buyer / Duplicate for Transporter) styling',
     ],
   },
 
   // 4. GST & Statutory Compliance
   {
-    id: 'gst-einvoice-api',
+    id: 'gst-einvoice-setup',
     category: 'compliance',
     categoryName: 'GST & Statutory Compliance',
-    badge: 'AUTOMATED API',
-    title: 'Direct e-Invoice Portal API Integration inside Tally',
+    badge: 'MANDATORY STATUTORY',
+    title: 'Direct e-Invoicing & e-Way Bill API Configuration',
     price: 'One-Time Setup',
-    description: 'Generating Invoice Reference Numbers (IRN) and signed QR codes directly from Tally without manually opening portals.',
+    description: 'Seamless integration of TallyPrime with the Government IRP Portal for single-click IRN and e-Way bill generation.',
     sla: 'Same-Day Configuration',
     deliverables: [
-      'Direct API registration with the Government NIC e-Invoice Portal',
-      '1-click e-Invoice IRN generation & QR code printing on vouchers',
-      'Automatic cancellation & error handling within TallyPrime',
-      'Complete compliance with mandatory statutory e-Invoicing limits',
+      'Government IRP e-Invoice API credential registration & setup',
+      'Automated IRN (Invoice Reference Number) generation from voucher entry',
+      'e-Way Bill single-click generation with vehicle details',
+      'Auto-generation of signed QR code onto printed Tax Invoices',
     ],
   },
   {
-    id: 'gst-eway-bill',
+    id: 'gstr-returns-prep',
     category: 'compliance',
     categoryName: 'GST & Statutory Compliance',
-    badge: 'LOGISTICS MODULE',
-    title: 'Automated e-Way Bill Integration & Transporter Setup',
-    price: 'Included in Setup',
-    description: 'Generating e-Way Bills directly from sales vouchers, calculating transport distances, and printing Part-B vehicle details.',
-    sla: 'Same-Day Configuration',
+    badge: 'TAX AUDIT',
+    title: 'GSTR-1, GSTR-3B & GSTR-9 Return Filing Workflow Setup',
+    price: 'Consultation Scope',
+    description: 'Configuring Tally GST masters to eliminate return mismatch errors and speed up month-end tax filing.',
+    sla: 'Structured Session',
     deliverables: [
-      'Direct e-Way Bill JSON generation & NIC portal submission',
-      'Distance calculation & transporter ID validation inside Tally',
-      'Consolidated e-Way Bill printing for multi-consignment dispatches',
-      'Cancellation and vehicle number update routines',
-    ],
-  },
-  {
-    id: 'gst-return-reconcile',
-    category: 'compliance',
-    categoryName: 'GST & Statutory Compliance',
-    badge: 'TAX ACCOUNTING',
-    title: 'GSTR-1, GSTR-3B & GSTR-2B Reconciliation Services',
-    price: 'Monthly / Quarterly',
-    description: 'Setting up automated return filing routines in Tally and reconciling purchase ledgers with portal GSTR-2A/2B data.',
-    sla: 'Ongoing Compliance',
-    deliverables: [
-      'GSTR-1 sales JSON export & error reconciliation before filing',
-      'GSTR-3B tax liability calculation & Input Tax Credit (ITC) match',
-      'GSTR-2B purchase reconciliation to identify unfiled vendor invoices',
-      'HSN/SAC summary verification to avoid tax penalty notices',
-    ],
-  },
-  {
-    id: 'tds-tcs-setup',
-    category: 'compliance',
-    categoryName: 'GST & Statutory Compliance',
-    badge: 'STATUTORY TAX',
-    title: 'TDS & TCS Tax Master Configuration & Statutory Rates',
-    price: 'One-Time Setup',
-    description: 'Configuring Tax Deducted at Source (TDS) and Tax Collected at Source (TCS) ledgers with updated statutory thresholds.',
-    sla: '24 Hours Delivery',
-    deliverables: [
-      'Creation of statutory TDS nature of payments & deductees',
-      'TCS ledger setup for sale of goods (Section 206C 1H)',
-      'Automated TDS deduction on purchase & service vouchers',
-      'Quarterly Form 26Q & 27EQ export preparation from Tally',
+      'HSN/SAC summary classification & GST tax rate ledger alignment',
+      'Reverse Charge Mechanism (RCM) voucher configuration',
+      'Direct JSON export for GST Portal portal return upload',
+      'GSTR-2B purchase reconciliation workflow assistance',
     ],
   },
 
   // 5. Digital & Web Studio
   {
-    id: 'web-apps',
+    id: 'custom-web-portal',
     category: 'digital',
     categoryName: 'Digital & Web Studio',
-    badge: 'WEB ENGINEERING',
-    title: 'Custom Web Application & B2B Wholesale Portal Build',
-    price: 'Bespoke Scope Quote',
-    description: 'Modern Next.js 15 web software, B2B wholesale self-service ordering portals, and multi-branch inventory web dashboards.',
-    sla: '3–5 Weeks Build SLA',
+    badge: 'NEXT.JS 15 APP',
+    title: 'B2B Client Ordering Portal & Corporate Web Application',
+    price: 'Custom Project Scope',
+    description: 'Modern, high-speed Next.js 15 web applications built for corporate branding, B2B wholesale ordering, and invoice downloads.',
+    sla: '3–6 Weeks Build',
     deliverables: [
-      'Sub-second fast Next.js 15 web software with mobile-first design',
-      'B2B Wholesale client portal for order placement & invoice history',
-      'Role-based access control (Admin, Manager, Client, Accountant)',
-      'High-security cloud hosting setup on Vercel or AWS with SSL',
-    ],
-  },
-  {
-    id: 'mobile-apps',
-    category: 'digital',
-    categoryName: 'Digital & Web Studio',
-    badge: 'MOBILE ENGINEERING',
-    title: 'Cross-Platform iOS & Android Mobile Application Build',
-    price: 'Bespoke Scope Quote',
-    description: 'Native cross-platform mobile apps for field sales order booking, logistics status tracking, and customer catalogues.',
-    sla: '6–8 Weeks Build SLA',
-    deliverables: [
-      'Cross-platform iOS and Android mobile app build (React Native / Flutter)',
-      'Sales representative order booking app with offline sync mode',
-      'Camera barcode scanner & Bluetooth thermal receipt printing',
-      'App Store & Google Play Store publishing & maintenance',
+      'Next.js 15 SSR architecture with responsive mobile-first UI',
+      'B2B customer login, order booking, and invoice PDF downloads',
+      'Direct API synchronization with central Tally database',
+      'SEO-optimized semantic code structure and fast loading times',
     ],
   },
   {
     id: 'tally-rest-api',
     category: 'digital',
     categoryName: 'Digital & Web Studio',
-    badge: 'DATABASE API SYNC',
-    title: 'Real-Time Tally Database REST API Integration Bridge',
-    price: 'Bespoke Scope Quote',
-    description: 'Connecting e-commerce websites, mobile apps, and external ERP databases directly to Tally for automated voucher creation.',
-    sla: '2–3 Weeks Build SLA',
+    badge: 'API INTEGRATION',
+    title: 'Live Tally REST API & Database Cloud Synchronization',
+    price: 'Per Connector Scope',
+    description: 'Real-time API connector that syncs website orders, CRM leads, and payment records directly into desktop Tally ledgers.',
+    sla: 'Modular Integration',
     deliverables: [
-      'Secure Node.js REST API bridge connecting Tally with web servers',
-      'Automated sales order & customer ledger creation inside Tally',
+      'Bidirectional REST API connector between web server and Tally',
+      'Automated creation of Sales Vouchers, Receipts & Customer Ledgers',
       'Real-time inventory stock balance synchronization to web shop',
       'Audit log monitoring with automated sync error alerts',
     ],
@@ -423,31 +312,23 @@ export default function ServicesPage() {
       {/* Page Hero - Dark Dual-Tone */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[850px] h-[480px] bg-gradient-to-br from-amber-500/15 via-emerald-500/15 to-transparent blur-[140px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
-            <span className="w-8 h-[2px] bg-amber-400" />
-            <span>COMPLETE ENTERPRISE SERVICES & PRODUCTS DIRECTORY</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl">
-            All Services & Products Offered by S.B. Enterprise.
-          </h1>
-          <p className="text-slate-300 text-lg max-w-3xl leading-relaxed font-normal">
-            Explore our complete catalogue of 20+ specialized solutions — from official TallyPrime software licensing and AnyDesk AMC support to custom TDL scripts, e-Invoicing, Next.js web applications, and staff training.
-          </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            {['20+ Professional Services', 'Tally Certified Partner', '24–48h AMC SLA', 'Kolkata Desk'].map((tag) => (
-              <span key={tag} className="px-4 py-1.5 text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <PageHeaderReveal
+            badge="COMPLETE ENTERPRISE SERVICES & PRODUCTS DIRECTORY"
+            title="All Services & Products Offered by"
+            highlightText="S.B. Enterprise."
+            description="Explore our complete catalogue of 20+ specialized solutions — from official TallyPrime software licensing and AnyDesk AMC support to custom TDL scripts, e-Invoicing, Next.js web applications, and staff training."
+            tags={['20+ Professional Services', 'Tally Certified Partner', '24–48h AMC SLA', 'Kolkata Desk']}
+          />
         </div>
       </section>
 
       {/* Interactive Cost Estimator Tool Section (Dark Dual-Tone) */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-20 lg:py-28 border-b border-amber-500/20 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-8">
-          <CostCalculator />
+          <FadeIn direction="up">
+            <CostCalculator />
+          </FadeIn>
         </div>
       </section>
 
@@ -456,7 +337,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
           
           {/* Top Search Bar & Category Tabs */}
-          <div className="space-y-6 bg-white p-6 rounded-3xl border-2 border-amber-200/90 shadow-md">
+          <FadeIn direction="up" className="space-y-6 bg-white p-6 rounded-3xl border-2 border-amber-200/90 shadow-md">
             
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="relative w-full sm:w-96">
@@ -478,80 +359,92 @@ export default function ServicesPage() {
             {/* Category Filter Pills */}
             <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-amber-100">
               {serviceCategories.map((cat) => (
-                <button
+                <motion.button
                   key={cat.id}
+                  whileTap={{ scale: 0.96 }}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                     activeTab === cat.id
                       ? 'bg-amber-500 text-slate-950 shadow-sm font-extrabold'
                       : 'bg-amber-50/70 text-slate-700 hover:bg-amber-100 border border-amber-200/80'
                   }`}
                 >
                   {cat.label}
-                </button>
+                </motion.button>
               ))}
             </div>
 
-          </div>
+          </FadeIn>
 
           {/* Service Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCatalogue.map((service) => (
-              <div
-                key={service.id}
-                className="bg-white border-2 border-amber-200/90 rounded-3xl p-8 space-y-6 shadow-md hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  
-                  <div className="flex items-center justify-between border-b border-amber-100 pb-3">
-                    <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-wider">
-                      {service.badge}
-                    </span>
-                    <span className="px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 rounded-full">
-                      {service.sla}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-slate-950 group-hover:text-amber-800 transition-colors leading-tight">
-                    {service.title}
-                  </h3>
-                  
-                  <div className="text-xs font-bold text-amber-900 bg-amber-50 inline-block px-2.5 py-1 rounded-lg border border-amber-200">
-                    {service.price}
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    {service.description}
-                  </p>
-
-                  <div className="pt-3 space-y-2 border-t border-amber-100">
-                    <span className="text-[11px] font-bold text-slate-950 uppercase block">Deliverables & Scope:</span>
-                    {service.deliverables.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
-                        <Check className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-
-                <div className="pt-4 border-t border-amber-100 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-500">{service.categoryName}</span>
-                  <Link
-                    href={`/contact?interest=${encodeURIComponent(service.title)}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-xl transition-all shadow-sm"
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence>
+              {filteredCatalogue.map((service) => (
+                <motion.div
+                  layout
+                  key={service.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <InteractiveCard
+                    lift={-5}
+                    className="bg-white border-2 border-amber-200/90 rounded-3xl p-8 space-y-6 shadow-md hover:border-amber-500 transition-colors duration-300 flex flex-col justify-between group h-full"
                   >
-                    Inquire Service
-                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+                    <div className="space-y-4">
+                      
+                      <div className="flex items-center justify-between border-b border-amber-100 pb-3">
+                        <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-wider">
+                          {service.badge}
+                        </span>
+                        <span className="px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 rounded-full">
+                          {service.sla}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-slate-950 group-hover:text-amber-800 transition-colors leading-tight">
+                        {service.title}
+                      </h3>
+                      
+                      <div className="text-xs font-bold text-amber-900 bg-amber-50 inline-block px-2.5 py-1 rounded-lg border border-amber-200">
+                        {service.price}
+                      </div>
+
+                      <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                        {service.description}
+                      </p>
+
+                      <div className="pt-3 space-y-2 border-t border-amber-100">
+                        <span className="text-[11px] font-bold text-slate-950 uppercase block">Deliverables & Scope:</span>
+                        {service.deliverables.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
+                            <Check className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                    </div>
+
+                    <div className="pt-4 border-t border-amber-100 flex items-center justify-between">
+                      <span className="text-[11px] font-semibold text-slate-500">{service.categoryName}</span>
+                      <Link
+                        href={`/contact?interest=${encodeURIComponent(service.title)}`}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#0A0E1A] hover:bg-slate-900 rounded-xl transition-all shadow-sm hover:scale-105"
+                      >
+                        Inquire Service
+                        <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                      </Link>
+                    </div>
+                  </InteractiveCard>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {filteredCatalogue.length === 0 && (
-            <div className="bg-white border-2 border-amber-200 rounded-3xl p-12 text-center space-y-3">
+            <FadeIn direction="none" className="bg-white border-2 border-amber-200 rounded-3xl p-12 text-center space-y-3">
               <p className="text-slate-600 font-medium">No matching services found for "{searchQuery}".</p>
               <button
                 onClick={() => { setSearchQuery(''); setActiveTab('all'); }}
@@ -559,7 +452,7 @@ export default function ServicesPage() {
               >
                 Reset Search Filters
               </button>
-            </div>
+            </FadeIn>
           )}
 
         </div>
@@ -568,7 +461,9 @@ export default function ServicesPage() {
       {/* Live Interactive TDL Preview Widget Section (Dark Dual-Tone) */}
       <section className="bg-gradient-to-br from-[#060A14] via-[#0D1527] to-[#121B2F] text-white py-24 lg:py-32 border-b border-amber-500/20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-8">
-          <TdlPreviewWidget />
+          <FadeIn direction="up">
+            <TdlPreviewWidget />
+          </FadeIn>
         </div>
       </section>
 
